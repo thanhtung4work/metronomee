@@ -1,0 +1,169 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Sprites/plus_btn_normal.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/plus_btn_pressed.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/OpenSans-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Sprites/dragger.png" type="Texture" id=4]
+[ext_resource path="res://Objects/GrabberArea.tres" type="StyleBox" id=5]
+[ext_resource path="res://Sprites/play_btn_pressed.png" type="Texture" id=6]
+[ext_resource path="res://Metronome.gd" type="Script" id=7]
+[ext_resource path="res://Sounds/click1.mp3" type="AudioStream" id=8]
+[ext_resource path="res://Sprites/minus_btn_normal.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/minus_btn_pressed.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/play_btn_normalal.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/pause_btn_normal.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/pause_btn_pressed.png" type="Texture" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+size = 200
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 120
+extra_spacing_char = 10
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 70
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+border_width_top = 10
+border_width_bottom = 10
+border_color = Color( 1, 0.921569, 0.717647, 1 )
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.141176, 0.215686, 0.388235, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 100.0
+margin_top = 300.0
+margin_right = -100.0
+margin_bottom = -100.0
+script = ExtResource( 7 )
+
+[node name="MetronomeTimer" type="Timer" parent="MarginContainer"]
+
+[node name="Click" type="AudioStreamPlayer" parent="MarginContainer"]
+stream = ExtResource( 8 )
+volume_db = 10.0
+
+[node name="VerticalBox" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 880.0
+margin_bottom = 1520.0
+custom_constants/separation = 40
+
+[node name="BpmContainer" type="HBoxContainer" parent="MarginContainer/VerticalBox"]
+margin_right = 880.0
+margin_bottom = 273.0
+custom_constants/separation = 10
+
+[node name="BPM" type="Label" parent="MarginContainer/VerticalBox/BpmContainer"]
+margin_right = 435.0
+margin_bottom = 273.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_colors/font_color = Color( 1, 0.431373, 0.192157, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "140"
+align = 2
+valign = 2
+
+[node name="BpmLabel" type="Label" parent="MarginContainer/VerticalBox/BpmContainer"]
+margin_left = 445.0
+margin_right = 880.0
+margin_bottom = 273.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_colors/font_color = Color( 1, 0.921569, 0.717647, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "bpm"
+valign = 2
+
+[node name="Message" type="Label" parent="MarginContainer/VerticalBox"]
+margin_top = 313.0
+margin_right = 880.0
+margin_bottom = 409.0
+custom_colors/font_color = Color( 1, 0.921569, 0.717647, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "nice and steady"
+align = 1
+
+[node name="BpmControl" type="HBoxContainer" parent="MarginContainer/VerticalBox"]
+margin_top = 449.0
+margin_right = 880.0
+margin_bottom = 669.0
+custom_constants/separation = 20
+
+[node name="Less" type="TextureButton" parent="MarginContainer/VerticalBox/BpmControl"]
+margin_right = 175.0
+margin_bottom = 220.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 10 )
+
+[node name="BpmSlider" type="HSlider" parent="MarginContainer/VerticalBox/BpmControl"]
+margin_left = 195.0
+margin_right = 685.0
+margin_bottom = 220.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_icons/grabber_disabled = ExtResource( 4 )
+custom_icons/grabber_highlight = ExtResource( 4 )
+custom_icons/grabber = ExtResource( 4 )
+custom_styles/slider = SubResource( 4 )
+custom_styles/grabber_area_highlight = ExtResource( 5 )
+custom_styles/grabber_area = ExtResource( 5 )
+min_value = 40.0
+max_value = 200.0
+value = 60.0
+
+[node name="More" type="TextureButton" parent="MarginContainer/VerticalBox/BpmControl"]
+margin_left = 705.0
+margin_right = 880.0
+margin_bottom = 220.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="MarginContainer/VerticalBox"]
+margin_top = 709.0
+margin_right = 880.0
+margin_bottom = 1009.0
+rect_min_size = Vector2( 0, 300 )
+
+[node name="Play" type="TextureButton" parent="MarginContainer/VerticalBox/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -87.5
+margin_right = 200.0
+margin_bottom = 87.5
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 6 )
+
+[node name="PauseControl" type="Control" parent="MarginContainer/VerticalBox"]
+margin_top = 1049.0
+margin_right = 880.0
+margin_bottom = 1299.0
+rect_min_size = Vector2( 0, 250 )
+
+[node name="Pause" type="TextureButton" parent="MarginContainer/VerticalBox/PauseControl"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -110.0
+margin_right = 200.0
+margin_bottom = 110.0
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 13 )
